@@ -1,0 +1,24 @@
+com/workshop/management/Application.java
+ com.workshop.management.Application
+com/workshop/management/ships/entity/Ship.java
+ com.workshop.management.ships.entity.Ship
+com/workshop/management/customers/entity/Customer.java
+ com.workshop.management.customers.entity.Customer
+com/workshop/management/workshops/entity/MaintenanceJob.java
+ com.workshop.management.workshops.entity.MaintenanceJob
+com/workshop/management/frontend/UIClass.java
+ com.workshop.management.frontend.UIClass
+com/workshop/management/ships/api/ShipController.java
+ com.workshop.management.ships.api.ShipController
+com/workshop/management/ships/repository/ShipRepository.java
+ com.workshop.management.ships.repository.ShipRepository
+com/workshop/management/workshops/api/WorkshopController.java
+ com.workshop.management.workshops.api.WorkshopController
+com/workshop/management/customers/repository/CustomerRepository.java
+ com.workshop.management.customers.repository.CustomerRepository
+com/workshop/management/customers/service/CustomerService.java
+ com.workshop.management.customers.service.CustomerService
+com/workshop/management/customers/api/CustomerController.java
+ com.workshop.management.customers.api.CustomerController
+com/workshop/management/workshops/repository/MaintenanceRepository.java
+ com.workshop.management.workshops.repository.MaintenanceRepository

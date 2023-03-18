@@ -1,0 +1,70 @@
+#spring:
+#  jpa:
+#    properties:
+#      hibernate:
+#        default_schema: workshop
+#    hibernate:
+#      ddl-auto: create
+#  #Local Credentials might change for PC to PC
+#  datasource:
+#    driverClassName: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/dop-postgres
+#    username: postgres
+#    password: postgress
+#  application:
+#    name: WorkshopManagement
+#  lifecycle:
+#    timeout-per-shutdown-phase: 20s
+#  jackson:
+#    deserialization:
+#      fail-on-unknown-properties: true
+#  profiles: local
+#
+#
+#management:
+#  endpoints:
+#    enabled-by-default: false
+#    web:
+#      exposure:
+#        include: info,health,metrics,prometheus,refresh
+#  endpoint:
+#    info:
+#      enabled: true
+#    metrics:
+#      enabled: true
+#    prometheus:
+#      enabled: true
+#    refresh:
+#      enabled: true
+#    health:
+#      enabled: true
+#      show-details: never
+#      show-components: always
+#      group:
+#        readiness:
+#          include: readinessState,livenessState
+#  metrics:
+#    export:
+#      prometheus:
+#        enabled: true
+#  health:
+#    probes:
+#      enabled: true
+#
+##Tracing (see: https://github.com/opentracing-contrib/java-spring-jaeger)
+#opentracing:
+#  jaeger:
+#    log-spans: false
+#
+#rest:
+#  apiTitle: WorkshopManagement
+#  apiVersion: 1.0.0
+#  contextPath: WorkshopManagement
+#  bindingMode: json
+#  cors: false
+#  groupId: com.workshop.management;
+#
+#server:
+#  servlet:
+#    contextPath: /WorkshopManagement
+#  port: 2345
