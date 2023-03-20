@@ -32,8 +32,7 @@ public class Customer implements Serializable {
   @Column(name = "name")
   private String name;
 
-  @Type(type = "text")
-  @Column(name = "address")
+  @Column(name = "address",columnDefinition = "TEXT")
   private String address;
 
   @Column(name = "postal_code")

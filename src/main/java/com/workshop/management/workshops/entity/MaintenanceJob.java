@@ -36,8 +36,7 @@ public class MaintenanceJob implements Serializable {
   @Column(name = "end_time")
   private Date endTime;
 
-  @Type(type = "text")
-  @Column(name = "description")
+  @Column(name = "description",columnDefinition = "TEXT")
   private String description;
 
   @Column(name = "actual_start_time")
