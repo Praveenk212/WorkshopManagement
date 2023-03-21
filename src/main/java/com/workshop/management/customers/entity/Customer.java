@@ -1,21 +1,11 @@
 package com.workshop.management.customers.entity;
 
-import com.workshop.management.ships.entity.Ship;
 import java.io.Serializable;
-import java.util.Date;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 @Entity
 @Data
@@ -47,4 +37,65 @@ public class Customer implements Serializable {
   @Column(name = "email_address")
   private String emailAddress;
 
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public String getPostalCode() {
+    return postalCode;
+  }
+
+  public void setPostalCode(String postalCode) {
+    this.postalCode = postalCode;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getTelephoneNumber() {
+    return telephoneNumber;
+  }
+
+  public void setTelephoneNumber(String telephoneNumber) {
+    this.telephoneNumber = telephoneNumber;
+  }
+
+  public String getEmailAddress() {
+    return emailAddress;
+  }
+
+  @Override
+  public String toString() {
+    return "Customer{" +
+            "customerId=" + customerId +
+            ", name='" + name + '\'' +
+            ", address='" + address + '\'' +
+            ", postalCode='" + postalCode + '\'' +
+            ", city='" + city + '\'' +
+            ", telephoneNumber='" + telephoneNumber + '\'' +
+            ", emailAddress='" + emailAddress + '\'' +
+            '}';
+  }
+
+  public void setEmailAddress(String emailAddress) {
+    this.emailAddress = emailAddress;
+  }
 }

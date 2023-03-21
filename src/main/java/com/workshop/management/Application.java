@@ -1,36 +1,17 @@
 package com.workshop.management;
 
-import com.workshop.management.customers.entity.Customer;
-import com.workshop.management.ships.entity.Ship;
-import com.workshop.management.workshops.entity.MaintenanceJob;
+import com.vaadin.flow.component.dependency.CssImport;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
 
 /**
  * Main Application Class.
  */
 @SpringBootApplication
-@Import({Customer.class, Ship.class, MaintenanceJob.class})
+@CssImport(value = "./styles/center.css")
+@CssImport(value = "./styles/vaadin-text-field-styles.css")
 public class Application extends SpringBootServletInitializer {
-
-
-  @Bean
-  public Customer customerBean() {
-    return new Customer();
-  }
-
-  @Bean
-  public Ship shipBean() {
-    return new Ship();
-  }
-
-  @Bean
-  public MaintenanceJob maintenanceJobBean() {
-    return new MaintenanceJob();
-  }
 
   /**
    * Starts the application.

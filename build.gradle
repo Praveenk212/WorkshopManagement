@@ -3,9 +3,13 @@
  */
 
 plugins {
+    id 'org.springframework.boot' version '3.0.4'
     id 'java'
     id 'maven-publish'
 }
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 repositories {
     mavenLocal()
@@ -17,7 +21,8 @@ repositories {
         url = uri('https://maven.vaadin.com/vaadin-addons')
     }
 }
-group = 'com.workshop.management'
+
+group 'com.workshop.management'
 version = '2.0-SNAPSHOT'
 description = 'Vaadin form example'
 java.sourceCompatibility = JavaVersion.VERSION_17
@@ -32,7 +37,6 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.26'
     implementation 'org.springframework.boot:spring-boot-starter-actuator:3.0.4'
     implementation 'org.springframework.boot:spring-boot-starter-web:3.0.4'
-    implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'org.hibernate:hibernate-core:6.1.7.Final'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.4'
 }
