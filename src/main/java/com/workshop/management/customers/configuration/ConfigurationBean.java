@@ -12,4 +12,5 @@ public class ConfigurationBean {
         return new Customer();
     }
 
+
 }
