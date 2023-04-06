@@ -1,39 +1,25 @@
 package com.workshop.management.frontend;
 
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.contextmenu.MenuItem;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.menubar.MenuBar;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 
 @Route("/home")
-public class HomePage extends VerticalLayout {
+public class HomePage extends VerticalLayout implements RouterLayout {
 
     public HomePage() {
-        // Set up the page layout
-        setDefaultHorizontalComponentAlignment(Alignment.CENTER);
-        setSpacing(true);
-        setPadding(true);
-
-        // Add a header
-        Label header = new Label("Welcome to Ship Management");
-        header.getStyle().set("font-size", "xx-large");
-        add(header);
-
-        // Add some instructions
-        Label instructions = new Label("Select an option from the menu to get started.");
-        instructions.getStyle().set("font-size", "large");
-        add(instructions);
-
-        // Add a menu with clickable actions
+        setSizeFull();
         MenuBar menuBar = new MenuBar();
-        MenuItem ships = menuBar.addItem("Ships", (ComponentEventListener<ClickEvent<MenuItem>>) null);
+        menuBar.addItem("Customer", e -> UI.getCurrent().navigate("customer"));
+        menuBar.addItem("Home", e -> UI.getCurrent().navigate("home"));
+        Header header = new Header();
+        header.add(menuBar);
+        add(header);
+        setHorizontalComponentAlignment(Alignment.CENTER, header);
 
-        MenuItem routes = menuBar.addItem("Routes", (ComponentEventListener<ClickEvent<MenuItem>>) null);
-
-        add(menuBar);
     }
 }
 

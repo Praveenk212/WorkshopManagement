@@ -9,10 +9,20 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "customers", schema = "workshop")
 public class Customer implements Serializable {
+
+  public Customer() {
+  }
+
+  public Integer getCustomerId() {
+    return customerId;
+  }
+
+  public void setCustomerId(Integer customerId) {
+    this.customerId = customerId;
+  }
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +31,15 @@ public class Customer implements Serializable {
 
   @Column(name = "name")
   private String name;
+
+  public Customer( String name, String address, String postalCode, String city, String telephoneNumber, String emailAddress) {
+    this.name = name;
+    this.address = address;
+    this.postalCode = postalCode;
+    this.city = city;
+    this.telephoneNumber = telephoneNumber;
+    this.emailAddress = emailAddress;
+  }
 
   @Column(name = "address",columnDefinition = "TEXT")
   private String address;

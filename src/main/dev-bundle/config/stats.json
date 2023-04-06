@@ -158,8 +158,8 @@
  "bundleImports": [
   "@vaadin/vaadin-themable-mixin",
   "Frontend/styles/center.css",
+  "Frontend/styles/style.css",
   "Frontend/styles/vaadin-text-field-styles.css",
-  "Frontend/styles/shared-styles.css",
   "@vaadin/grid/theme/lumo/vaadin-grid.js",
   "@vaadin/grid/theme/lumo/vaadin-grid-column.js",
   "@vaadin/accordion/theme/lumo/vaadin-accordion-panel.js",
@@ -257,9 +257,9 @@
   "Frontend/generated/jar-resources/virtualListConnector.js"
  ],
  "frontendHashes": {
-  "styles/center.css": "4954b1baa85804af3a305d2bd8795c885f788c6a7f56502a2d4a81211cffd2ae",
+  "styles/center.css": "e8c10de3f065a3e4af7121635a6d131a65360b96d60c4957497f08d1155446b9",
+  "styles/style.css": "e91f44a797bf0ac3f81b2e062d0bcefe729fdb13afee07a2ae037c23e5645225",
   "styles/vaadin-text-field-styles.css": "307f3c757c0cfdd92cbcb322fac36644759d664cd9271b9bd5a27a2c6b48b5f2",
-  "styles/shared-styles.css": "d127fca8a3b459f5b7ed6140f5f130f829a4ed86a6deb867a3a43926df61888a",
   "comboBoxConnector.js": "1d004c3dae9c76f8bcc68678abe1b8f7bdc8b456f5c9c4c7f190df8ed25d66cd",
   "contextMenuConnector.js": "25a200f8086461635ddd92316ebeb5a868294c8650a190efbae120edb1088f4f",
   "contextMenuTargetConnector.js": "870f67643988dd5618c247bd3c28d843f70aa026ee89f44c3c7556b5e70856af",
@@ -283,7 +283,7 @@
  },
  "themeJsonContents": {},
  "entryScripts": [
-  "VAADIN/build/indexhtml-5af27c61.js"
+  "VAADIN/build/indexhtml-b00f61fe.js"
  ],
  "webComponents": [],
  "packageJsonHash": "6d22a7a18ac45a8f027a9d08e22dea880b735a66b4e97f1d4a2f5657119f4833"

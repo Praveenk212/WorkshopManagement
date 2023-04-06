@@ -1,71 +1,52 @@
 package com.workshop.management.frontend;
-
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Header;
-import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Nav;
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.theme.lumo.LumoUtility;
 
-@CssImport("./styles/shared-styles.css")
-@Route("header")
-public class MainLayout extends Composite<AppLayout> {
-
-    private final Tabs menu;
-    private final Header header;
+@Route("/main")
+public class MainLayout extends AppLayout {
 
     public MainLayout() {
-        this.header = createHeader();
-        this.menu = createMenu();
-        getContent().setPrimarySection(AppLayout.Section.DRAWER);
-        getContent().addToDrawer(this.menu);
-        getContent().addToNavbar(new DrawerToggle());
-        getContent().addToNavbar(this.header);
+        createHeader();
+        createDrawer();
     }
 
-    private Header createHeader() {
-        Image logo = new Image("images/workshop.jpg", "My App Logo");
-        logo.setHeight("60px");
+    private void createHeader() {
+        H1 logo = new H1("Vaadin CRM");
+        logo.addClassNames(
+                LumoUtility.FontSize.LARGE,
+                LumoUtility.Margin.MEDIUM);
+//
+//        String u = securityService.getAuthenticatedUser().getUsername();
+//        Button logout = new Button("Log out " + u, e -> securityService.logout()); // <2>4
 
-        Span title = new Span("WorkShop Application");
-        title.addClassName("app-title");
+        Button home = new Button("Home",e-> UI.getCurrent().navigate("home"));
 
-        Div headerWrapper = new Div(logo, title);
-        headerWrapper.addClassName("header-wrapper");
+        var header = new HorizontalLayout(new DrawerToggle(), logo, home);
 
-        Header header = new Header();
-        header.add(headerWrapper);
-        return header;
+        header.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+        header.expand(logo); // <4>
+        header.setWidthFull();
+        header.addClassNames(
+                LumoUtility.Padding.Vertical.NONE,
+                LumoUtility.Padding.Horizontal.MEDIUM);
+
+        addToNavbar(header);
+
     }
 
-    private Tabs createMenu() {
-        final Tab home = new Tab("Home");
-        final Tab about = new Tab("About");
-        final Tab contact = new Tab("Contact");
-
-        home.add(new RouterLink("Home", HomePage.class));
-        about.add(new RouterLink("About", UIClass.class));
-        contact.add(new RouterLink("Contact", MainView.class));
-
-        final Tabs tabs = new Tabs(home, about, contact);
-        tabs.setOrientation(Tabs.Orientation.VERTICAL);
-        return tabs;
-    }
-
-    public void setContent(Component content) {
-        getContent().remove();
-        getContent().addToNavbar(new DrawerToggle());
-        getContent().addToNavbar(this.header);
-        getContent().addToDrawer(this.menu);
-        getContent().setContent(content);
+    private void createDrawer() {
+        addToDrawer(new VerticalLayout(
+                new RouterLink("Customer", CustomerView.class),
+                new RouterLink("Home", HomePage.class)
+        ));
     }
 }
-

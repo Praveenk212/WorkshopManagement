@@ -10,6 +10,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  */
 @SpringBootApplication
 @CssImport(value = "./styles/center.css")
+@CssImport(value = "./styles/style.css")
+//@CssImport(value = "./styles/main.css")
 @CssImport(value = "./styles/vaadin-text-field-styles.css")
 public class Application extends SpringBootServletInitializer {
 

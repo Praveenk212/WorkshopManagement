@@ -8,10 +8,10 @@ import { css, unsafeCSS, registerStyles } from '@vaadin/vaadin-themable-mixin';
 import $cssFromFile_0 from 'Frontend/styles/center.css?inline';
 const $css_0 = typeof $cssFromFile_0  === 'string' ? unsafeCSS($cssFromFile_0) : $cssFromFile_0;
 addCssBlock(`<style>${$css_0}</style>`);
-import $cssFromFile_1 from 'Frontend/styles/vaadin-text-field-styles.css?inline';
+import $cssFromFile_1 from 'Frontend/styles/style.css?inline';
 const $css_1 = typeof $cssFromFile_1  === 'string' ? unsafeCSS($cssFromFile_1) : $cssFromFile_1;
 addCssBlock(`<style>${$css_1}</style>`);
-import $cssFromFile_2 from 'Frontend/styles/shared-styles.css?inline';
+import $cssFromFile_2 from 'Frontend/styles/vaadin-text-field-styles.css?inline';
 const $css_2 = typeof $cssFromFile_2  === 'string' ? unsafeCSS($cssFromFile_2) : $cssFromFile_2;
 addCssBlock(`<style>${$css_2}</style>`);
 
