@@ -3,6 +3,7 @@ package com.workshop.management.frontend;
 import com.vaadin.flow.component.HasValueAndElement;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -80,7 +81,7 @@ public class CustomerEditor extends FormLayout implements KeyNotifier {
 
         save.addClickListener(e -> save());
         delete.addClickListener(e -> delete());
-        cancel.addClickListener(e -> editEmployee(customer));
+        cancel.addClickListener(e -> UI.getCurrent().navigate("home"));
         setVisible(false);
     }
 
