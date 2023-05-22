@@ -18,7 +18,6 @@ public class ConfigurationBean {
     Ship shipBean() {
         return new Ship();
     }
-
     @Bean
     MaintenanceJob maintenanceJobBean() {
         return new MaintenanceJob();
