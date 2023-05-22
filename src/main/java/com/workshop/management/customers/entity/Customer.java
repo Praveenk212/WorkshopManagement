@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @AllArgsConstructor
-@Table(name = "customers", schema = "workshop")
+@Table(name = "customers")
 public class Customer implements Serializable {
 
   public Customer() {

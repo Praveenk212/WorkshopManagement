@@ -6,8 +6,6 @@ import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
@@ -15,42 +13,46 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import com.workshop.management.customers.entity.Customer;
 import com.workshop.management.customers.repository.CustomerRepository;
+import com.workshop.management.ships.entity.Ship;
+import com.workshop.management.ships.repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @SpringComponent
 @UIScope
-@Route("customerEdit")
-public class CustomerEditor extends FormLayout implements KeyNotifier {
+@Route("shipEdit")
+public class ShipEditor extends FormLayout implements KeyNotifier {
 
-    private final CustomerRepository repository;
+    private final ShipRepository repository;
 
-    private Customer customer;
+    private final CustomerRepository customerRepository;
 
-    TextField name = new TextField("Name");
-    TextField address = new TextField("Address");
+    private Ship ship;
 
-    TextField postalCode = new TextField("postalCode");
-    TextField city = new TextField("city");
-    TextField telephoneNumber = new TextField("telephoneNumber");
-    TextField emailAddress = new TextField("emailAddress");
+    TextField imonumber = new TextField("Imonumber");
 
+    TextField brand = new TextField("Brand");
+
+    TextField type = new TextField("Type");
+
+    TextField ownerId = new TextField("ownerId");
 
     Button save = new Button("Save", VaadinIcon.CHECK.create());
     Button delete = new Button("Delete", VaadinIcon.TRASH.create());
-    HorizontalLayout actions = new HorizontalLayout(save, delete);
 
-    Binder<Customer> binder = new Binder<>(Customer.class);
+    Binder<Ship> binder = new Binder<>(Ship.class);
+
     private ChangeHandler changeHandler;
 
     @Autowired
-    public CustomerEditor(CustomerRepository repository) {
+    public ShipEditor(ShipRepository repository, CustomerRepository customerRepository) {
         this.repository = repository;
+        this.customerRepository = customerRepository;
 
-        add(name, address,postalCode,emailAddress,telephoneNumber,city, actions);
-        setRequiredIndicatorVisible(name, telephoneNumber, emailAddress, postalCode,
-                city,address);
+        add(ownerId,imonumber, brand,type,save,delete);
+        setRequiredIndicatorVisible(ownerId,imonumber, brand,type);
         addClassName("center");
         // Max width of the Form
         setMaxWidth("500px");
@@ -59,14 +61,12 @@ public class CustomerEditor extends FormLayout implements KeyNotifier {
         // On device widths 0-490px we have one column.
         // Otherwise, we have two columns.
         setResponsiveSteps(
-                new FormLayout.ResponsiveStep("0", 1, FormLayout.ResponsiveStep.LabelsPosition.TOP),
-                new FormLayout.ResponsiveStep("490px", 2, FormLayout.ResponsiveStep.LabelsPosition.TOP));
-        setColspan(name, 2);
-        setColspan(address, 2);
-        setColspan(emailAddress, 2);
-        setColspan(city, 2);
-        setColspan(postalCode, 2);
-        setColspan(telephoneNumber, 2);
+                new ResponsiveStep("0", 1, ResponsiveStep.LabelsPosition.TOP),
+                new ResponsiveStep("490px", 2, ResponsiveStep.LabelsPosition.TOP));
+        setColspan(imonumber, 2);
+        setColspan(brand, 2);
+        setColspan(type, 2);
+        setColspan(ownerId,2);
 
         binder.bindInstanceFields(this);
 
@@ -83,12 +83,18 @@ public class CustomerEditor extends FormLayout implements KeyNotifier {
     }
 
     void delete() {
-        repository.delete(customer);
+        repository.delete(ship);
         changeHandler.onChange();
     }
 
     void save() {
-        repository.save(customer);
+        Optional<Integer> ownerId = Optional.ofNullable(ship.getOwnerId());
+        if(ownerId.isPresent()) {
+            Customer customer = customerRepository.getById(ownerId.get());
+            if(customer!=null) {
+                repository.save(ship);
+            }
+        }
         changeHandler.onChange();
     }
 
@@ -96,21 +102,21 @@ public class CustomerEditor extends FormLayout implements KeyNotifier {
         void onChange();
     }
 
-    public final void editEmployee(Customer c) {
-        if (c == null) {
+    public final void editShip(Ship c) {
+        if (c == null ) {
             setVisible(false);
             return;
         }
-        final boolean persisted = c.getCustomerId() != null;
+        final boolean persisted = c.getOwnerId() != null;
         if (persisted) {
-            customer = repository.findById(c.getCustomerId()).get();
+            ship = repository.findById(c.getOwnerId()).get();
         } else {
-            customer = c;
+            ship = c;
         }
 
-        binder.setBean(customer);
+        binder.setBean(ship);
         setVisible(true);
-        name.focus();
+        imonumber.focus();
     }
 
     public void setChangeHandler(ChangeHandler h) {

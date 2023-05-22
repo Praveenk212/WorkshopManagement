@@ -11,9 +11,8 @@ import org.hibernate.annotations.Type;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "maintenance_job", schema = "workshop")
+@Table(name = "maintenance_job")
 public class MaintenanceJob implements Serializable {
 
   @Id
@@ -42,8 +41,95 @@ public class MaintenanceJob implements Serializable {
   @Column(name = "status")
   private String status;
 
-  @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-  @JoinColumn(name = "owner_id", referencedColumnName = "owner_id")
+  @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+  @JoinColumn(name = "ownerId", referencedColumnName = "owner_id")
   private Ship ship;
 
+  public MaintenanceJob(Date startTime, Date endTime, String description, Date actualStartTime, Date actualEndTime, String notes, String status) {
+    this.startTime = startTime;
+    this.endTime = endTime;
+    this.description = description;
+    this.actualStartTime = actualStartTime;
+    this.actualEndTime = actualEndTime;
+    this.notes = notes;
+    this.status = status;
+  }
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Date getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(Date startTime) {
+    this.startTime = startTime;
+  }
+
+  public Date getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(Date endTime) {
+    this.endTime = endTime;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Date getActualStartTime() {
+    return actualStartTime;
+  }
+
+  public void setActualStartTime(Date actualStartTime) {
+    this.actualStartTime = actualStartTime;
+  }
+
+  public Date getActualEndTime() {
+    return actualEndTime;
+  }
+
+  public void setActualEndTime(Date actualEndTime) {
+    this.actualEndTime = actualEndTime;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public void setNotes(String notes) {
+    this.notes = notes;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public Integer getShip() {
+    if(this.ship!=null)
+      return ship.getOwnerId();
+    else
+      return null;
+  }
+
+  public void setShip(Ship ship) {
+    this.ship = ship;
+  }
+
+  public MaintenanceJob() {
+  }
 }

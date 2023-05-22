@@ -13,8 +13,10 @@ public class HomePage extends VerticalLayout implements RouterLayout {
     public HomePage() {
         setSizeFull();
         MenuBar menuBar = new MenuBar();
-        menuBar.addItem("Customer", e -> UI.getCurrent().navigate("customer"));
         menuBar.addItem("Home", e -> UI.getCurrent().navigate("home"));
+        menuBar.addItem("Customer", e -> UI.getCurrent().navigate("customer"));
+        menuBar.addItem("Ships", e -> UI.getCurrent().navigate("ship"));
+        menuBar.addItem("Workshops", e -> UI.getCurrent().navigate("workshops"));
         Header header = new Header();
         header.add(menuBar);
         add(header);
