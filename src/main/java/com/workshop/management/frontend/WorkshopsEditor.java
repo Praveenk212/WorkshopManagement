@@ -4,6 +4,7 @@ import com.vaadin.flow.component.HasValueAndElement;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -13,13 +14,16 @@ import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import com.workshop.management.customers.entity.Customer;
 import com.workshop.management.ships.entity.Ship;
 import com.workshop.management.ships.repository.ShipRepository;
 import com.workshop.management.workshops.entity.MaintenanceJob;
 import com.workshop.management.workshops.repository.MaintenanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SpringComponent
@@ -33,7 +37,7 @@ public class WorkshopsEditor extends FormLayout implements KeyNotifier {
 
     private MaintenanceJob maintenanceJob;
   //"id", "startTime", "endTime","description","actualStartTime","actualEndTime","notes","status"
-   TextField ownerId = new TextField("ownerId");
+    ComboBox<String> ownerId = new ComboBox<>("Select ownerId");;
     DatePicker startTime = new DatePicker("startTime");
     DatePicker endTime = new DatePicker("endTime");
     TextField description = new TextField("description");
@@ -57,6 +61,17 @@ public class WorkshopsEditor extends FormLayout implements KeyNotifier {
     public WorkshopsEditor(MaintenanceRepository repository, ShipRepository shipRepository) {
         this.repository = repository;
         this.shipRepository = shipRepository;
+
+        List<Ship> ships = shipRepository.findAll();
+
+        List<String> ownerIds = ships.parallelStream()
+                .map(Ship::getOwnerId)
+                .map(Object::toString)
+                .collect(Collectors.toList());
+
+        ownerId.setItems(ownerIds);
+
+        ownerId.setAllowCustomValue(true);
 
         add(ownerId,startTime, endTime,description,actualStartTime,actualEndTime,notes,status, actions);
         setRequiredIndicatorVisible(ownerId, startTime, endTime,description,actualStartTime,actualEndTime,notes,status);

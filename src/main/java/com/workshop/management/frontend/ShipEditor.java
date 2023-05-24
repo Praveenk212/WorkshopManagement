@@ -4,8 +4,10 @@ import com.vaadin.flow.component.HasValueAndElement;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.listbox.ListBox;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.Route;
@@ -17,7 +19,9 @@ import com.workshop.management.ships.entity.Ship;
 import com.workshop.management.ships.repository.ShipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @SpringComponent
@@ -27,7 +31,7 @@ public class ShipEditor extends FormLayout implements KeyNotifier {
 
     private final ShipRepository repository;
 
-    private final CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository ;
 
     private Ship ship;
 
@@ -37,7 +41,8 @@ public class ShipEditor extends FormLayout implements KeyNotifier {
 
     TextField type = new TextField("Type");
 
-    TextField ownerId = new TextField("ownerId");
+    //TextField ownerId = new TextField("ownerId");
+    ComboBox<String> ownerId;
 
     Button save = new Button("Save", VaadinIcon.CHECK.create());
     Button delete = new Button("Delete", VaadinIcon.TRASH.create());
@@ -50,6 +55,19 @@ public class ShipEditor extends FormLayout implements KeyNotifier {
     public ShipEditor(ShipRepository repository, CustomerRepository customerRepository) {
         this.repository = repository;
         this.customerRepository = customerRepository;
+
+        List<Customer> customers = customerRepository.findAll();
+
+        List<String> ownerIds = customers.parallelStream()
+                .map(Customer::getCustomerId)
+                .map(Object::toString)
+                .collect(Collectors.toList());
+
+        ownerId = new ComboBox<>("Select ownerId");
+        ownerId.setItems(ownerIds);
+
+        ownerId.setAllowCustomValue(true);
+
 
         add(ownerId,imonumber, brand,type,save,delete);
         setRequiredIndicatorVisible(ownerId,imonumber, brand,type);
