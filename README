@@ -4,7 +4,7 @@
     Java        : 17
     Vaadin      : 24.0.0
     postgresql  : 42.5.4
-    npm         : 9.6.2
+    node.js     : 18.15.0
 
 
 
