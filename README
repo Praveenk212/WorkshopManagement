@@ -1,0 +1,32 @@
+#Technology used with their version as given below
+    SpringBoot  : 3.0.4
+    Gradle      : 7.5
+    Java        : 17
+    Vaadin      : 24.0.0
+    postgresql  : 42.5.4
+    npm         : 9.6.2
+
+
+
+#There are four environment variable namely
+1.port
+2.dbUrl
+3.dbUserName
+4.dbPass
+
+I passes this value as given below in application while running in IntelliJ IDEA
+
+--port=2345 --dbUrl=jdbc:postgresql://localhost:1234/postgres --dbUserName=postgres --dbPass=postgress
+
+dbUrl will be formed as ===== jdbc:postgresql://hostname:portNo/dbname
+             in my case hostName is localhost and port is 1234 for db
+
+
+#once application will start home page will be running as this
+
+     http://localhost:{portNumber}/workshopmanagement/home
+
+
+
+
+
