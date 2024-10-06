@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e621a08c-264e-4358-bb83-b37c2f83fe88" name="Changes" comment="github action">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/azure-functions-app-nodejs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/azure-functions-app-nodejs.yml" afterDir="false" />
-    </list>
+    <list default="true" id="e621a08c-264e-4358-bb83-b37c2f83fe88" name="Changes" comment="github action" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -254,7 +252,31 @@
       <option name="project" value="LOCAL" />
       <updated>1728228901543</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="github action">
+      <option name="closed" value="true" />
+      <created>1728229122205</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1728229122205</updated>
+    </task>
+    <task id="LOCAL-00018" summary="github action">
+      <option name="closed" value="true" />
+      <created>1728229279429</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1728229279429</updated>
+    </task>
+    <task id="LOCAL-00019" summary="github action">
+      <option name="closed" value="true" />
+      <created>1728229472561</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1728229472561</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
