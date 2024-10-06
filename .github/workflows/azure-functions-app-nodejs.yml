@@ -32,9 +32,9 @@ jobs:
       - name: deploy to production with artifact
         uses: azure/spring-apps-deploy@v1
         with:
-          azure-subscription: ${{ env.AZURE_SUBSCRIPTION }}
+          azure-subscription: '8d751c05-898c-4b1b-a733-26938f28c2f9'
           action: Deploy
-          service-name: <service instance name>
-          app-name: <app name>
+          service-name: WorkshopManagement
+          app-name: WorkshopManagement
           use-staging-deployment: false
           package: ${{ env.ASC_PACKAGE_PATH }}/build/libs/*.jar
