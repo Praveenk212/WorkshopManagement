@@ -29,6 +29,12 @@ jobs:
       - name: Gradle build, clean
         run: ./gradlew clean build
 
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-app
+          path: '${{ github.workspace }}/target/*.jar'
+
   deploy:
     runs-on: windows-latest
     needs: build
@@ -39,6 +45,10 @@ jobs:
       id-token: write #This is required for requesting the JWT
 
     steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: WorkshopManagement-2.0-SNAPSHOT
       
       - name: Login to Azure
         uses: azure/login@v2
@@ -50,10 +60,8 @@ jobs:
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
-        env:
-          ASC_PACKAGE_PATH: ${{ github.workspace }}
         with:
           app-name: 'Workshop'
           slot-name: 'Production'
-          package: ${{ env.ASC_PACKAGE_PATH }}/build/libs/WorkshopManagement-2.0-SNAPSHOT.jar
+          package: '*.jar'
           
