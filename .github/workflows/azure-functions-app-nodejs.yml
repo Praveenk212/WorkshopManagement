@@ -44,4 +44,4 @@ jobs:
           service-name: WorkshopManagement
           app-name: WorkshopManagement
           use-staging-deployment: false
-          package: ${{ env.ASC_PACKAGE_PATH }}/build/libs/*.jar
+          package: ${{ env.ASC_PACKAGE_PATH }}/build/libs/WorkshopManagement-2.0-SNAPSHOT.jar
