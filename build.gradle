@@ -1,38 +1,23 @@
 plugins {
     id 'org.springframework.boot' version '3.0.4'
+    id 'io.spring.dependency-management' version '1.1.0'
     id 'java'
     id 'maven-publish'
 }
 
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'java'
-
-compileJava {
-    sourceCompatibility = '17'
-    targetCompatibility = '17'
-}
-
-repositories {
-    mavenLocal()
-    maven {
-        url = uri('https://repo.maven.apache.org/maven2/')
-    }
-
-    maven {
-        url = uri('https://maven.vaadin.com/vaadin-addons')
-    }
-
-    maven {
-        url = uri('https://github.com/vaadin/vaadin-date-picker/releases')
-    }
-    mavenCentral()
-}
-
-group 'com.workshop.management'
+group = 'com.workshop.management'
 version = '2.0-SNAPSHOT'
 description = 'Vaadin form example'
 java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    maven { url = uri('https://repo.maven.apache.org/maven2/') }
+    maven { url = uri('https://maven.vaadin.com/vaadin-addons') }
+    maven { url = uri('https://github.com/vaadin/vaadin-date-picker/releases') }
+}
 
 dependencies {
     implementation 'com.vaadin:vaadin:24.0.0'
@@ -42,14 +27,11 @@ dependencies {
     implementation 'org.springframework.data:spring-data-jpa:3.0.3'
     implementation 'org.postgresql:postgresql:42.5.4'
     implementation 'org.projectlombok:lombok:1.18.26'
-   //    implementation 'org.springframework.boot:spring-boot-starter-actuator:3.0.4'
     implementation 'org.springframework.boot:spring-boot-starter-web:3.0.4'
     implementation 'org.hibernate:hibernate-core:6.1.7.Final'
     implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.4'
     implementation 'com.vaadin:vaadin-date-picker-flow:24.0.0'
 }
-
-
 
 publishing {
     publications {
@@ -62,3 +44,27 @@ publishing {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+def versionTag = new Date().format("yyyyMMdd-HHmm")
+def imageName = "praveenk212/vaadin-app:${versionTag}"
+
+tasks.register("buildDockerImage") {
+    dependsOn("bootJar")
+    doLast {
+        println("🔧 Building Docker image: ${imageName}")
+        exec {
+            commandLine("docker", "build", "-t", imageName, ".")
+        }
+    }
+}
+
+tasks.register("pushDockerImage") {
+    dependsOn("buildDockerImage")
+    doLast {
+        println("🚀 Pushing Docker image: ${imageName}")
+        exec {
+            commandLine("docker", "push", imageName)
+        }
+    }
+}
+
